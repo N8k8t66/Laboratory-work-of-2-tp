@@ -10,13 +10,9 @@ namespace Laboratorywork.Controllers
 {
     public class CourseController : Controller
     {
-        // ==================== ЧАСТЬ II ====================
-        // Хранилище книг в памяти (List<T> - вариант 2)
         private static List<Course> _courses = new List<Course>();
         private static int _nextId = 1;
 
-        // ==================== ЧАСТЬ III ====================
-        // ВНУТРЕННИЙ вспомогательный метод (параметризованный)
         public MvcHtmlString InternalCourseList(List<Course> courses, string title = "Мои курсы")
         {
             var html = new StringBuilder();
@@ -43,17 +39,13 @@ namespace Laboratorywork.Controllers
             return new MvcHtmlString(html.ToString());
         }
 
-        // ЧАСТЬ II: просмотр всех данных
-        // ЧАСТЬ III: передача логического значения через TempData (вариант 2)
         public ActionResult Index()
         {
-            // ЧАСТЬ III: TempData для выбора метода
-            TempData["UseInternalMethod"] = true;  // true - внутренний, false - внешний
+            TempData["UseInternalMethod"] = true;
 
             return View(_courses);
         }
 
-        // ЧАСТЬ II: сохранение текущего экземпляра через Session
         public ActionResult Select(int id)
         {
             var course = _courses.FirstOrDefault(b => b.Id == id);
@@ -65,7 +57,6 @@ namespace Laboratorywork.Controllers
             return RedirectToAction("Index");
         }
 
-        // ЧАСТЬ I: просмотр одной книги
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -93,13 +84,11 @@ namespace Laboratorywork.Controllers
             return View(course);
         }
 
-        // ЧАСТЬ I: форма добавления
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Book/Create - сохранение новой книги
         [HttpPost]
         public ActionResult Create(Course course)
         {
@@ -113,7 +102,6 @@ namespace Laboratorywork.Controllers
             return View(course);
         }
 
-        // ЧАСТЬ I: форма редактирования
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -134,7 +122,6 @@ namespace Laboratorywork.Controllers
             return View(course);
         }
 
-        // POST: Book/Edit - сохранение изменений
         [HttpPost]
         public ActionResult Edit(Course course)
         {
