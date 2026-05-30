@@ -1,0 +1,109 @@
+@using LaboratoryWork.Helpers
+@model List<LaboratoryWork.Model.Course>
+
+@{
+    ViewBag.Title = "Список курсов";
+
+    int? currentCourseId = Session["CurrentCourseId"] as int?;
+    var currentCourse = currentCourseId.HasValue ? Model.FirstOrDefault(c => c.Id == currentCourseId) : null;
+
+    bool useInternalMethod = TempData["UseInternalMethod"] != null && (bool)TempData["UseInternalMethod"];
+
+    TempData.Keep("UseInternalMethod");
+}
+
+<h2>Список курсов</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+@if (currentCourse != null)
+{
+    <div class="alert alert-info">
+        <strong>Текущий выбранный курс:</strong>
+        ID: @currentCourse.Id |
+        Название: @currentCourse.CourseName |
+        Преподаватель: @currentCourse.Teacher |
+        Часы: @currentCourse.Hours |
+        Дата начала: @currentCourse.StartDate.ToShortDateString() |
+        Стоимость: @currentCourse.Price.ToString("C")
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Добавить новый курс", "Create", null, new { @class = "btn btn-success" })
+</p>
+
+@* Вызов вспомогательных методов в зависимости от TempData (часть III) *@
+@if (useInternalMethod)
+{
+    var controller = (LaboratoryWork.Controllers.CourseController)ViewContext.Controller;
+    @controller.InternalCourseList(Model, "Список курсов (внутренний метод)")
+}
+else
+{
+    @Html.ExternalCourseList(Model, "Список курсов (внешний метод)")
+}
+
+@* Таблица со списком курсов, цикл while (вариант В, часть II) *@
+@if (Model.Count == 0)
+{
+    <p>Нет курсов. Добавьте первый!</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Название курса</th>
+                <th>Преподаватель</th>
+                <th>Часов</th>
+                <th>Дата начала</th>
+                <th>Стоимость</th>
+                <th>Телефон</th>
+                <th>Действия</th>
+                <th>Выбрать</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int i = 0;
+                while (i < Model.Count)
+                {
+                    var course = Model[i];
+                    var isCurrent = currentCourseId.HasValue && currentCourseId.Value == course.Id;
+
+                    <tr class="@(isCurrent ? "table-primary" : "")">
+                        <td>@course.Id</td>
+                        <td>@course.CourseName</td>
+                        <td>@course.Teacher</td>
+                        <td>@course.Hours</td>
+                        <td>@course.StartDate.ToShortDateString()</td>
+                        <td>@course.Price.ToString("C")</td>
+                        <td>@course.Phone</td>
+                        <td>
+                            @Html.ActionLink("Просмотр", "Details", new { id = course.Id }, new { @class = "btn btn-sm btn-info" })
+                            @Html.ActionLink("Редактировать", "Edit", new { id = course.Id }, new { @class = "btn btn-sm btn-warning" })
+                        </td>
+                        <td>
+                            @if (!isCurrent)
+                            {
+                                @Html.ActionLink("Выбрать", "Select", new { id = course.Id }, new { @class = "btn btn-sm btn-primary" })
+                            }
+                            else
+                            {
+                                <span class="badge badge-success">Текущий</span>
+                            }
+                        </td>
+                    </tr>
+                    i++;
+                }
+            }
+        </tbody>
+    </table>
+}
