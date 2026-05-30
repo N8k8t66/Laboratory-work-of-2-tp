@@ -1,0 +1,14 @@
+@model LaboratoryWork.Model.Course
+@{
+    ViewBag.Title = "Детали курса";
+}
+
+<h2>Информация о курсе</h2>
+
+    @Html.LabelForModel(Данные курса)
+    @Html.DisplayForModel()
+
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Назад к списку", "Index")
+</p>
