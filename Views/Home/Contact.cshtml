@@ -1,19 +1,69 @@
 @{
     ViewBag.Title = "Contact";
 }
+
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title.</h2>
     <h3>@ViewBag.Message</h3>
 
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Контактная информация</h3>
+            </div>
+            <div class="panel-body">
+                <address>
+                    <strong>Разработчик:</strong> Студент группы<br />
+                    <strong>Кафедра:</strong> Информационных систем<br />
+                    <strong>Учебное заведение:</strong> Технический университет<br />
+                    <abbr title="Телефон">Тел.:</abbr>
+                    +7 (123) 456-78-90<br />
+                    <strong>Email:</strong> <a href="mailto:student@university.ru">student@university.ru</a>
+                </address>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Связь с преподавателем</h3>
+            </div>
+            <div class="panel-body">
+                <address>
+                    <strong>Преподаватель:</strong> Иванов И.И.<br />
+                    <strong>Кабинет:</strong> 401, главный корпус<br />
+                    <strong>Часы приема:</strong> Вторник, четверг 14:00-16:00<br />
+                    <abbr title="Телефон">Тел.:</abbr>
+                    +7 (987) 654-32-10<br />
+                    <strong>Email:</strong> <a href="mailto:teacher@university.ru">teacher@university.ru</a>
+                </address>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
-</main>
+<div class="well">
+    <h4>График работы деканата</h4>
+    <table class="table table-bordered">
+        <tr>
+            <th>День недели</th>
+            <th>Часы работы</th>
+        </tr>
+        <tr>
+            <td>Понедельник - Пятница</td>
+            <td>09:00 - 18:00</td>
+        </tr>
+        <tr>
+            <td>Суббота</td>
+            <td>10:00 - 14:00</td>
+        </tr>
+        <tr>
+            <td>Воскресенье</td>
+            <td>Выходной</td>
+        </tr>
+    </table>
+</div>
+
+<p>@Html.ActionLink("На главную", "Index", "Home")</p>
