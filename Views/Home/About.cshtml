@@ -1,9 +1,41 @@
 @{
-    ViewBag.Title = "About";
+    ViewBag.Title = "О проекте";
 }
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
 
-    <p>Use this area to provide additional information.</p>
-</main>
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="well">
+    <h4>Лабораторная работа №2</h4>
+    <p>
+        Данное приложение разработано в рамках лабораторной работы по дисциплине 
+        "Разработка web-приложений на ASP.NET MVC".
+    </p>
+    
+    <h4>Тема работы</h4>
+    <p>
+        Создание MVC-приложения с использованием шаблонных методов HtmlHelper, 
+        вспомогательных методов (внутренних и внешних), а также работа с массивами/списками данных.
+    </p>
+    
+    <h4>Используемые технологии</h4>
+    <ul>
+        <li>ASP.NET MVC 5</li>
+        <li>.NET Framework</li>
+        <li>Entity Framework (не используется, данные хранятся в List&lt;T&gt;)</li>
+        <li>Bootstrap 3</li>
+        <li>HTML5 / CSS3</li>
+    </ul>
+    
+    <h4>Функциональность</h4>
+    <ul>
+        <li>Просмотр списка курсов (с использованием цикла while)</li>
+        <li>Просмотр детальной информации о курсе (LabelForModel + DisplayForModel)</li>
+        <li>Добавление нового курса (LabelFor + EditorFor)</li>
+        <li>Редактирование существующего курса (LabelFor + EditorFor)</li>
+        <li>Внутренний и внешний вспомогательные методы для отображения списка</li>
+        <li>Хранение текущего экземпляра в Session</li>
+    </ul>
+</div>
+
+<p>@Html.ActionLink("На главную", "Index", "Home")</p>
